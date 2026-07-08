@@ -25,7 +25,7 @@ def run_pipeline(trajectory_path: str, lidar_path: str, output_path: str, buffer
     print(f"[m_b] Generating {buffer_size}m road corridor buffer (EPSG:25832)...")
     gdf_buffer = create_road_buffer(gdf_trajectory, buffer_distance_meters=buffer_size)
     # Extrai a geometria do polígono unificado (dissolvido) para a busca espacial
-    buffer_geometry = gdf_buffer.unary_union
+    buffer_geometry = gdf_buffer.union.all()
     
     # 3. Ingestão da nuvem de pontos LiDAR
     print(f"[m_b] Loading LiDAR point cloud from: {os.path.basename(lidar_path)}")
